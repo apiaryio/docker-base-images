@@ -4,7 +4,13 @@ This repository helps to keep Apiary environment, services and libraries consist
 
 Each directory have area of responsibility and the libraries should derive from the respective image.
 
-As a lot of applications/libraries are deployed on Heroku, images are usually derived from the Ubuntu version from the latest Heroku stack.
+As a lot of applications/libraries are deployed on Heroku, images are usually derived from the Ubuntu version from the latest Heroku stack. Libraries use what's the minimal stack available.
+
+## Naming
+
+Base development images uses `base-dev-` prefix.
+
+Base deployment/runtime images uses `base-` prefix.
 
 ## Versioning
 
@@ -30,15 +36,15 @@ We keep `latest` tag for testing and that is updated at-will. Otherwise, semver 
 	$ (sudo) docker push -t "apiaryio/base-$name:$version"
 	```
 
-1. When building Apiary app, use the proper `FROM: ` directive inside your `Dockerfile`
+1. When building Apiary app, use the proper `FROM:` directive inside your `Dockerfile`
 
 
 ## Areas of responsibility
 
 ### C++-based programs
 
-* Directory: [cpp](cpp/)
-* DockerHub name: `base-cpp`
+* Directories: [cpp](cpp/) and [cpp-dev](cpp-dev/)
+* DockerHub name: `base-cpp` and `base-dev-cpp`
 
 
 When written in C++, such as:
