@@ -1,7 +1,7 @@
 FROM        ubuntu:14.04
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-02-23
+ENV REFRESHED_AT 2015-02-24
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
@@ -12,4 +12,4 @@ RUN mkdir -p /data/db
 
 EXPOSE 27017
 
-ENTRYPOINT usr/bin/mongod --smallfiles
+ENTRYPOINT ["/usr/bin/mongod", "--smallfiles"]
