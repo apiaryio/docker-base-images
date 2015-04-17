@@ -1,5 +1,6 @@
 #!/bin/bash
 curl https://raw.githubusercontent.com/creationix/nvm/v0.23.0/install.sh | bash
+echo "[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh" >> ~/.profile
 . ~/.nvm/nvm.sh
 nvm install v0.10.37
 nvm alias default v0.10.37
