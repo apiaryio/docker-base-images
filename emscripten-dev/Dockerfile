@@ -21,3 +21,4 @@ RUN apt-get -y --purge remove curl git cmake && apt-get -y autoremove
 
 VOLUME ["/src"]
 WORKDIR /src
+
