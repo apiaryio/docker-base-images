@@ -8,7 +8,7 @@ build.
 ## Versioning
 
 The docker image version is the same as emscrpten version so
-`apiaryio/emscripten-dev:1.31.0` corresponds to emscripten version `1.31.0`.
+`apiaryio/base-emscripten-dev:1.31.0` corresponds to emscripten version `1.31.0`.
 
 ## Usage
 
@@ -16,7 +16,7 @@ Once `pulled` the usage is simple either invoke simple commands for
 interactive use
 
 ```sh
-$> docker run --rm -v $(pwd):/src -t apiaryio/emscripten-dev emconfigure ./configure
+$> docker run --rm -v $(pwd):/src -t apiaryio/base-emscripten-dev emconfigure ./configure
 ```
 
 or if working on non-trivial project have a build script run that, see
@@ -24,7 +24,7 @@ the `emcc` direcotry in drafter
 [repo](https://github.com/apiaryio/drafter).
 
 ```sh
-$> docker run --rm -v $(pwd):/src -t apiaryio/emscripten-dev emcc/emcbuild.sh
+$> docker run --rm -v $(pwd):/src -t apiaryio/base-emscripten-dev emcc/emcbuild.sh
 ```
 
 Both examples assume you are in the root directory of your project
