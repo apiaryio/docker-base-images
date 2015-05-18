@@ -1,7 +1,7 @@
 FROM        ubuntu:14.04
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-04-16
+ENV REFRESHED_AT 2015-05-18
 ENV NODE_VERSION v0.10.37
 
 RUN apt-get update
