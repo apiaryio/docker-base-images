@@ -1,7 +1,7 @@
 FROM        debian:jessie
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-07-02
+ENV REFRESHED_AT 2015-07-07
 
 RUN apt-get update
 
@@ -11,7 +11,10 @@ RUN apt-get install -y python-sphinx \
     pandoc \
     texlive \
     texlive-latex-extra \
-    sphinx_rtd_theme
+    python-pip
+
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
 
 RUN mkdir /docs
 
