@@ -15,9 +15,9 @@ RUN apt-get install -y python-sphinx \
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
-RUN mkdir /docs
+RUN mkdir /mnt/docs
 
-WORKDIR /docs
-VOLUME ['/docs']
+WORKDIR /mnt/docs
+VOLUME ['/mnt/docs']
 
 CMD make clean html latexpdf
