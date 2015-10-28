@@ -1,23 +1,27 @@
 FROM        debian:jessie
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-09-10
+ENV REFRESHED_AT 2015-10-27
 
-RUN apt-get clean
+COPY requirements.txt /tmp/
 
-RUN apt-get update
-
-RUN apt-get install -y python-sphinx \
+RUN apt-get clean && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends python-sphinx \
     graphviz \
     make \
     texlive \
     texlive-latex-extra \
     texlive-fonts-recommended \
     texlive-fonts-extra \
-    python-pip
-
-COPY requirements.txt /tmp/
-RUN pip install -r /tmp/requirements.txt
+    python-pip && \
+    pip install -r /tmp/requirements.txt && \
+    rm -rf /usr/share/doc/* && \
+    rm -rf /usr/share/locale/* && \
+    rm -rf /var/cache/debconf/*-old && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get autoclean -y && \
+    apt-get autoremove -y
 
 RUN mkdir /mnt/docs
 
