@@ -1,7 +1,7 @@
 FROM        debian:jessie
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-10-27
+ENV REFRESHED_AT 2015-11-03
 
 COPY requirements.txt /tmp/
 
