@@ -1,7 +1,8 @@
 FROM        apiaryio/base-sphinx-doc-dev
 MAINTAINER  Apiary <sre@apiary.io>
 
-RUN apt-get install -y npm
+RUN apt-get update && \
+    apt-get install -y npm
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
