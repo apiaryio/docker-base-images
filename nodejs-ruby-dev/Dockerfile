@@ -1,4 +1,4 @@
-FROM        apiaryio/base-dev-nodejs-12
+FROM        apiaryio/base-dev-nodejs-0.12
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2015-10-07
