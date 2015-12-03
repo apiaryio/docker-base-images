@@ -1,7 +1,7 @@
 FROM        apiaryio/base-dev-nodejs-0.12
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-10-07
+ENV REFRESHED_AT 2015-12-03
 ENV RUBY_VERSION 2.2.3
 ENV BUNDLER_VERSION 1.10.6
 
