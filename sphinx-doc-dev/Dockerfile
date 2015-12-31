@@ -7,10 +7,11 @@ COPY requirements.txt /tmp/
 
 RUN apt-get clean && \
     apt-get update && \
-    apt-get install -y --no-install-recommends python-sphinx \
-    graphviz \
-    make \
-    python-pip && \
+    apt-get install -y --no-install-recommends \
+        python-sphinx \
+        graphviz \
+        make \
+        python-pip && \
     pip install -r /tmp/requirements.txt && \
     rm -rf /usr/share/doc/* && \
     rm -rf /usr/share/locale/* && \
