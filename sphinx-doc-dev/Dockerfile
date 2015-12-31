@@ -9,6 +9,7 @@ RUN apt-get clean && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         python-sphinx \
+        python-yaml \
         graphviz \
         make \
         python-pip && \
