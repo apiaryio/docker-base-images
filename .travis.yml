@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "4"
+sudo: false
+
+notifications:
+  email:
+    recipients:
+      - ladislav@apiary.io
+    on_success: change
+    on_failure: always
+

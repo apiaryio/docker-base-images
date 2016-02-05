@@ -1,0 +1,22 @@
+{
+  "name": "docker-base-images",
+  "version": "1.0.0",
+  "description": "This repository helps to keep Apiary environment, services and libraries consistent and in sync.",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apiaryio/docker-base-images.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apiaryio/docker-base-images/issues"
+  },
+  "homepage": "https://github.com/apiaryio/docker-base-images#readme",
+  "dependencies": {
+    "dockerlint": "0.1.4"
+  }
+}
