@@ -1,1 +1,1 @@
-find . -name "Dockerfile" -exec dockerlint {} \;
+find . -name "Dockerfile" -exec dockerlint -f {} \;
