@@ -1,13 +1,19 @@
-FROM        ubuntu:14.04
+FROM        apiaryio/base-dev-debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-10
 ENV NODE_VERSION v0.12.10
 ENV NPM_VERSION 2.14.7
 
-RUN apt-get update
-
-RUN apt-get install -y libc6 libc-dev g++ zlib1g-dev build-essential git  libssl1.0.0 libssl-dev libssl-doc curl libpq-dev python tar
+RUN apt-get clean && \
+    apt-get update && \
+    apt-get install -y libc6 libc-dev g++ zlib1g-dev build-essential git  libssl1.0.0 libssl-dev libssl-doc curl libpq-dev python tar && \
+    apt-get autoclean -y && \
+    apt-get autoremove -y && \
+    rm -rf /usr/share/doc/* && \
+    rm -rf /usr/share/locale/* && \
+    rm -rf /var/cache/debconf/*-old && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create user ubuntu
 COPY entry.sh /root/entry.sh
