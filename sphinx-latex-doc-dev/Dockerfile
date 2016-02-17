@@ -16,4 +16,4 @@ RUN apt-get clean && \
     apt-get autoclean -y && \
     apt-get autoremove -y
 
-CMD make clean html latexpdf
+CMD ["make", "clean", "html", "latexpdf"]

@@ -24,6 +24,6 @@ RUN apt-get clean && \
 RUN mkdir /mnt/docs
 
 WORKDIR /mnt/docs
-VOLUME ['/mnt/docs']
+VOLUME ["/mnt/docs"]
 
-CMD make clean html
+CMD ["make", "clean", "html"]
