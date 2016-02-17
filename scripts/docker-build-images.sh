@@ -12,8 +12,9 @@ do
     echo "Building $PACKAGE_NAME based on $DOCKERFILE"
     docker build -t $PACKAGE_NAME -f $DOCKERFILE $LOCATION
     echo "Squashing $PACKAGE_NAME..."
-    docker export $(docker run -d $PACKAGE_NAME /bin/bash) > "/tmp/$IMAGE_NAME.tar"
-    docker import "/tmp/$IMAGE_NAME.tar" $PACKAGE_NAME > /dev/null
+    docker save $PACKAGE_NAME > "/tmp/$IMAGE_NAME.tar"
+    sudo docker-squash -i "/tmp/$IMAGE_NAME.tar" -o "/tmp/$IMAGE_NAME-squashed.tar"
+    cat "/tmp/$IMAGE_NAME-squashed.tar" | docker load
     echo "Squashed $PACKAGE_NAME"
 done
 echo "All done!"
