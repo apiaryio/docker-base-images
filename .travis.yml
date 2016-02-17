@@ -3,6 +3,10 @@ node_js:
   - "4"
 sudo: false
 
+install: ./scripts/install-dependencies.sh
+
+script: ./test.sh && ./scripts/docker-build-images.sh
+
 notifications:
   email:
     recipients:
