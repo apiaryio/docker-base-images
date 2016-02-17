@@ -8,7 +8,7 @@ services:
 
 install: ./scripts/install-dependencies.sh
 
-script: ./test.sh && ./scripts/docker-build-images.sh
+script: ./scripts/docker-build-images.sh
 
 notifications:
   email:
