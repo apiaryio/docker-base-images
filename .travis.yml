@@ -8,7 +8,13 @@ services:
 
 install: ./scripts/install-dependencies.sh
 
-script: ./scripts/docker-build-images.sh
+before_script: ./scripts/docker-build-images.sh
+
+deploy:
+  provider: script
+  script: ./scripts/docker-internal-release.sh
+  on:
+      branch: master
 
 notifications:
   email:
