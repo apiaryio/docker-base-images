@@ -6,9 +6,7 @@ sudo: required
 services:
   - docker
 
-install: ./scripts/install-dependencies.sh
-
-before_script: ./scripts/docker-build-images.sh
+before_script: ./scripts/install-dependencies.sh && ./scripts/docker-build-images.sh
 
 deploy:
   provider: script
