@@ -1,7 +1,18 @@
 language: node_js
 node_js:
   - "4"
-sudo: false
+sudo: required
+
+services:
+  - docker
+
+before_script: ./scripts/install-dependencies.sh && ./scripts/docker-build-images.sh
+
+deploy:
+  provider: script
+  script: ./scripts/docker-internal-release.sh
+  on:
+      branch: master
 
 notifications:
   email:
