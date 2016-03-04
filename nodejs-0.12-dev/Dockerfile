@@ -2,7 +2,7 @@ FROM        apiaryio/base-dev-debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-10
-ENV NODE_VERSION v0.12.10
+ENV NODE_VERSION v0.12.11
 ENV NPM_VERSION 2.14.7
 
 RUN apt-get clean && \
