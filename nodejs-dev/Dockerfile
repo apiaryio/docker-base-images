@@ -2,7 +2,7 @@ FROM        ubuntu:14.04
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-10
-ENV NODE_VERSION v0.10.42
+ENV NODE_VERSION v0.10.43
 ENV NPM_VERSION 2.14.7
 
 RUN apt-get update
