@@ -2,3 +2,4 @@ Sphinx>=1.3.1
 sphinx_rtd_theme
 commonmark==0.5.5
 recommonmark
+PyYAML
