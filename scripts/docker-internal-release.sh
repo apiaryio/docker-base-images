@@ -29,8 +29,9 @@ for IMAGE_NAME in $IMAGES_TO_SQUASH
 do
     echo "Preparing to push $IMAGE_NAME..."
     PACKAGE_NAME="apiaryio/base-dev-$IMAGE_NAME"
+    docker tag -f $PACKAGE_NAME $PACKAGE_NAME:latest
     echo "Pushing $PACKAGE_NAME..."
-    docker push $PACKAGE_NAME
-    echo "$PACKAGE_NAME pushed successfully"
+    docker push $PACKAGE_NAME:latest
+    echo "$PACKAGE_NAME:latest pushed successfully"
 done
 echo "All done!"
