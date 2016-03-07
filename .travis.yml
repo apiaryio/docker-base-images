@@ -1,23 +1,23 @@
 language: node_js
 node_js:
-  - "4"
+- '4'
 sudo: required
-
 services:
-  - docker
-
+- docker
 before_script: ./scripts/install-dependencies.sh && ./scripts/docker-build-images.sh
-
 deploy:
   provider: script
   script: ./scripts/docker-internal-release.sh
   on:
-      branch: master
-
+    branch: master
 notifications:
   email:
     recipients:
-      - ladislav@apiary.io
+    - ladislav@apiary.io
     on_success: change
     on_failure: always
-
+env:
+  global:
+  - secure: aYbsW7RjNFxay4hHRxebw/RVNvtJGrYiKZnVGELOTdOoJF4IR9LcC2CuStX3x6NP2PfzgAR8DaZu/ht4U11M/3JEGfjQm30E6AONEm29qdGvJhpEEYK5nGHTlWohDZRd23bUWn6+zLqUw6Nz/RGPmd/Yg57XUz6ZlIzFVBeKpaw=
+  - secure: GzMiwhqE584coOtMJCHVYhw7K3huasPrXPTxiyNzoH1nr/6DS2FRevWBMnO2BT+Nl4MHgJtzVz51VZORIHaV4Qbw7rhDmEx8bag6ZCn/fNFSmjkYOy4s9KuGK8KbAnZx8PD+mH4FMNy+8eQAC8CndmdP5f1FHer3ZowOL/YuZAc=
+  - secure: TF3938h3ZBSorKeJqltK9Zp35FDaPkFXmyWuyNfdWyQ8yQLPkblWubqLCf1bZ3g+QLJhu1i6j/hYY92DZCAc1ulTKsHAhv8c8TOSaycYn6hDCIltO1dh0KyoTp7zzBCq/YQ83IZ0G774R0RTxgode3G6cSr06kSGw/YDD6hkBnQ=
