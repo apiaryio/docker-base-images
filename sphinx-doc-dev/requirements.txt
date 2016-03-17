@@ -3,3 +3,4 @@ sphinx_rtd_theme
 commonmark==0.5.5
 recommonmark
 PyYAML
+sphinxcontrib-googleanalytics
