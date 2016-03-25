@@ -4,5 +4,6 @@ FROM mhart/alpine-node:4.4
 RUN apk add --no-cache make gcc g++ python
 RUN npm config set loglevel error
 RUN npm install dredd
+RUN apk del make gcc g++
 
 CMD ["/node_modules/.bin/dredd"]
