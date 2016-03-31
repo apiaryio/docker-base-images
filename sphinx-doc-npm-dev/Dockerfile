@@ -16,4 +16,4 @@ RUN mkdir /mnt/lib
 WORKDIR /mnt/lib
 VOLUME ["/mnt/lib"]
 
-CMD ["make", "clean", "html", "latexpdf"]
+CMD ["make", "clean", "html"]
