@@ -5,4 +5,4 @@ echo "[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh" >> ~/.profile
 nvm install ${NODE_VERSION}
 nvm alias default ${NODE_VERSION}
 npm -g install npm@${NPM_VERSION}
-npm -g install coffee-script@1.8.0 grunt-cli@0.1.13
+npm -g install coffee-script@1.10.0 grunt-cli@1.2.0
