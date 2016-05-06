@@ -21,7 +21,6 @@ RUN locale-gen --purge C.UTF-8 && \
 
 # Set up user, and allow sudo as some bundler packages need it
 RUN mkdir -p /srv/jekyll && \
-    useradd -G sudo -m jekyll && \
-    echo '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+    useradd -m jekyll
 
 WORKDIR /srv/jekyll
