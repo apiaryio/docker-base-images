@@ -8,7 +8,8 @@ RUN apt-get clean && \
     apt-get install -y --no-install-recommends texlive \
     texlive-latex-extra \
     texlive-fonts-recommended \
-    texlive-fonts-extra && \
+    texlive-fonts-extra \
+    rst2pdf && \
     rm -rf /usr/share/doc/* && \
     rm -rf /usr/share/locale/* && \
     rm -rf /var/cache/debconf/*-old && \
