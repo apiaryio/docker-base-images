@@ -5,5 +5,6 @@ RUN apk add --no-cache make gcc g++ python
 RUN npm config set loglevel error
 RUN npm install dredd
 RUN apk del make gcc g++ python
+ENV PATH ${PATH}:/node_modules/.bin
 
-CMD ["/node_modules/.bin/dredd"]
+CMD ["dredd"]
