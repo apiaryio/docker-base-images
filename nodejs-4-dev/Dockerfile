@@ -1,0 +1,25 @@
+FROM        apiaryio/base-dev-debian-minimal
+MAINTAINER  Apiary <sre@apiary.io>
+
+ENV REFRESHED_AT 2016-06-10
+ENV NODE_VERSION v4.4.5
+ENV NPM_VERSION 3.9.5
+
+RUN apt-get clean && \
+    apt-get update && \
+    apt-get install -y libc6 libc-dev g++ zlib1g-dev build-essential git  libssl1.0.0 libssl-dev libssl-doc curl libpq-dev python tar && \
+    apt-get autoclean -y && \
+    apt-get autoremove -y && \
+    rm -rf /usr/share/doc/* && \
+    rm -rf /usr/share/locale/* && \
+    rm -rf /var/cache/debconf/*-old && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create user ubuntu
+COPY entry.sh /root/entry.sh
+RUN /root/entry.sh
+# Run install nvm
+COPY script.sh /home/ubuntu/script.sh
+ENV PATH /home/ubuntu/.nvm/${NODE_VERSION}/bin:$PATH
+USER ubuntu
+RUN /home/ubuntu/script.sh
