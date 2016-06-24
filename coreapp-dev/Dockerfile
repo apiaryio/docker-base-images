@@ -1,7 +1,7 @@
 FROM        apiaryio/base-dev-nodejs
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2010-02-10
+ENV REFRESHED_AT 2010-06-24
 
 USER root
 RUN apt-get install -y wget \
