@@ -1,8 +1,8 @@
 FROM        apiaryio/base-dev-debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-06-10
-ENV NODE_VERSION v4.4.5
+ENV REFRESHED_AT 2016-06-24
+ENV NODE_VERSION v4.4.6
 ENV NPM_VERSION 3.9.5
 
 RUN apt-get clean && \
