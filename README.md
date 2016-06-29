@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/apiaryio/docker-base-images.svg?style=svg)](https://circleci.com/gh/apiaryio/docker-base-images)
+
 # Apiary's base Docker images
 
 This repository helps to keep Apiary environment, services and libraries consistent and in sync. 
