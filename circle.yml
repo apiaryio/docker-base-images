@@ -1,6 +1,8 @@
 machine:
   services:
     - docker
+  node:
+    version: 4.4.0
 dependencies:
   pre:
     - ./scripts/install-dependencies.sh
