@@ -4,7 +4,7 @@
   "description": "This repository helps to keep Apiary environment, services and libraries consistent and in sync.",
   "main": "index.js",
   "scripts": {
-    "test": "bash test.sh"
+    "test": "bash scripts/test.sh"
   },
   "repository": {
     "type": "git",
