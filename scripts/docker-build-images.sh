@@ -11,6 +11,11 @@ do
     PACKAGE_NAME="apiaryio/base-dev-$IMAGE_NAME"
     echo "Building $PACKAGE_NAME based on $DOCKERFILE"
     docker build -t $PACKAGE_NAME -f $DOCKERFILE $LOCATION
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -ne 0 ]; then
+        echo "Error building $PACKAGE_NAME"
+        exit $EXIT_CODE
+    fi
     echo "Squashing $PACKAGE_NAME..."
     docker save $PACKAGE_NAME > "/tmp/$IMAGE_NAME.tar"
     sudo docker-squash -i "/tmp/$IMAGE_NAME.tar" -o "/tmp/$IMAGE_NAME-squashed.tar"

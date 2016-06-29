@@ -4,6 +4,14 @@ if [ -z "$IMAGES_TO_SQUASH" ]; then
     exit 1
 fi
 
+function exitOnError {
+  EXIT_CODE=$?
+  if [ $EXIT_CODE -ne 0 ]; then
+    echo "$1 failed with code $EXIT_CODE"
+    exit $EXIT_CODE
+  fi
+}
+
 echo "Authenticating with Docker Hub..."
 if [[ -z "$DOCKER_EMAIL" || -z "$DOCKER_USER" || -z "$DOCKER_PASS" ]]; then
     echo "DockerHub credentials are missing (DOCKER_EMAIL, DOCKER_USER, DOCKER_PASS), cannot proceed."
@@ -17,13 +25,7 @@ if [[ -e $CREDENTIALS_FILE && ! -w $CREDENTIALS_FILE ]]; then
 fi
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-
-if [[ -e $CREDENTIALS_FILE ]]; then
-    if ! grep -q "index.docker.io" "$CREDENTIALS_FILE"; then
-        echo "Docker login failed, cannot proceed."
-        exit 1
-    fi
-fi
+exitOnError "docker login"
 
 for IMAGE_NAME in $IMAGES_TO_SQUASH
 do
@@ -32,6 +34,7 @@ do
     docker tag -f $PACKAGE_NAME $PACKAGE_NAME:latest
     echo "Pushing $PACKAGE_NAME..."
     docker push $PACKAGE_NAME:latest
+    exitOnError "pushing $PACKAGE_NAME"
     echo "$PACKAGE_NAME:latest pushed successfully"
 done
 echo "All done!"
