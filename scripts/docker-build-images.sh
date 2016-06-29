@@ -18,7 +18,8 @@ do
     fi
     echo "Squashing $PACKAGE_NAME..."
     docker save $PACKAGE_NAME > "/tmp/$IMAGE_NAME.tar"
-    sudo docker-squash -i "/tmp/$IMAGE_NAME.tar" -o "/tmp/$IMAGE_NAME-squashed.tar"
+    echo "Squashing $PACKAGE_NAME..."
+    docker run -v /tmp:/tmp apiaryio/docker-squash docker-squash -i "/tmp/$IMAGE_NAME.tar" -o "/tmp/$IMAGE_NAME-squashed.tar"
     cat "/tmp/$IMAGE_NAME-squashed.tar" | docker load
     echo "Squashed $PACKAGE_NAME"
 done

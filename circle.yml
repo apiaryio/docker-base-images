@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - ./scripts/docker-build-images.sh
+test:
+  override:
+    - ./test.sh
+deployment:
+    production:
+        branch: master
+        commands:
+          - ./scripts/docker-internal-release.sh
