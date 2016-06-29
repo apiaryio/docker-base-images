@@ -8,7 +8,7 @@ dependencies:
     - ./scripts/docker-build-images.sh
 test:
   override:
-    - ./test.sh
+    - ./scripts/test.sh
 deployment:
     production:
         branch: master
