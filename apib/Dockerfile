@@ -1,7 +1,7 @@
-FROM        apiaryio/base-dev-nodejs
+FROM        node:0.10
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2015-09-21
+ENV REFRESHED_AT 2016-07-14
 
 RUN npm install -g aglio
 USER root
