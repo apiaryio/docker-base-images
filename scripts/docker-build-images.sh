@@ -1,25 +1,22 @@
 #!/bin/bash
-if [ -z "$IMAGES_TO_SQUASH" ]; then
-    echo "No IMAGES_TO_SQUASH set, skipping the internal build"
-    exit 1
+if [[ -z "$CIRCLE_COMPARE_URL" || "$REBUILD_ALL" ]]; then
+    REBUILD_ALL=1
+else
+    if [[ $CIRCLE_COMPARE_URL =~ compare\/([0-9a-f]+)\.\.\.([0-9a-f]+)$ ]]; then
+        SHA1=${BASH_REMATCH[1]}
+        SHA2=${BASH_REMATCH[2]}
+        CHANGED_FILES=`git diff --name-only $SHA1 $SHA2`
+        REBUILD_ALL=0
+    else
+        echo "Couldn't parse CIRCLE_COMPARE_URL, rebuilding all images"
+        REBUILD_ALL=1
+    fi
 fi
 
-for IMAGE_NAME in $IMAGES_TO_SQUASH
-do
-    LOCATION="./$IMAGE_NAME-dev"
-    DOCKERFILE="$LOCATION/Dockerfile"
-    PACKAGE_NAME="apiaryio/base-dev-$IMAGE_NAME"
-    echo "Building $PACKAGE_NAME based on $DOCKERFILE"
-    docker build -t $PACKAGE_NAME -f $DOCKERFILE $LOCATION
-    EXIT_CODE=$?
-    if [ $EXIT_CODE -ne 0 ]; then
-        echo "Error building $PACKAGE_NAME"
-        exit $EXIT_CODE
-    fi
-    echo "Squashing $PACKAGE_NAME..."
-    docker save $PACKAGE_NAME > "/tmp/$IMAGE_NAME.tar"
-    sudo docker-squash -i "/tmp/$IMAGE_NAME.tar" -o "/tmp/$IMAGE_NAME-squashed.tar"
-    cat "/tmp/$IMAGE_NAME-squashed.tar" | docker load
-    echo "Squashed $PACKAGE_NAME"
-done
+python ./scripts/build-images.py -a $REBUILD_ALL -f "$CHANGED_FILES"
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+    exit $EXIT_CODE
+fi
+
 echo "All done!"

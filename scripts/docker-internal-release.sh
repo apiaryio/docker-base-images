@@ -1,7 +1,13 @@
 #!/bin/bash
-if [ -z "$IMAGES_TO_SQUASH" ]; then
-    echo "No IMAGES_TO_SQUASH set, skipping the internal release"
-    exit 1
+
+if [ -z "$IMAGES" ]; then
+    if [ -e /tmp/images ]; then
+        IMAGES=`cat /tmp/images`
+    fi
+    if [ -z "$IMAGES" ]; then
+        echo "No IMAGES set, skipping the internal release"
+        exit 1
+    fi
 fi
 
 function exitOnError {
@@ -27,14 +33,12 @@ fi
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 exitOnError "docker login"
 
-for IMAGE_NAME in $IMAGES_TO_SQUASH
+for IMAGE_NAME in $IMAGES
 do
     echo "Preparing to push $IMAGE_NAME..."
-    PACKAGE_NAME="apiaryio/base-dev-$IMAGE_NAME"
-    docker tag -f $PACKAGE_NAME $PACKAGE_NAME:latest
-    echo "Pushing $PACKAGE_NAME..."
-    docker push $PACKAGE_NAME:latest
-    exitOnError "pushing $PACKAGE_NAME"
-    echo "$PACKAGE_NAME:latest pushed successfully"
+    echo "Pushing $IMAGE_NAME..."
+    docker push $IMAGE_NAME
+    exitOnError "pushing $IMAGE_NAME"
+    echo "$IMAGE_NAME pushed successfully"
 done
 echo "All done!"

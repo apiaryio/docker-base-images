@@ -1,52 +1,51 @@
-# Apiary's base Docker images
+[![CircleCI](https://circleci.com/gh/apiaryio/docker-base-images.svg?style=svg)](https://circleci.com/gh/apiaryio/docker-base-images)
 
-This repository helps to keep Apiary environment, services and libraries consistent and in sync. 
+# Apiary Docker images
+
+This repository helps keep Apiary environment, services and libraries consistent and in sync. 
 
 Each directory has an area of responsibility and the libraries should derive from the respective image.
 
-As a lot of applications/libraries are deployed on Heroku, images are usually derived from the Ubuntu version from the latest Heroku stack. Libraries use the minimal stack available.
+To keep the image size to its minimum, images are usually derived from minimal Debian image (apiaryio/debian-minimal) 
+or Alpine Linux.
 
-## Naming
+Libraries use the minimal stack available.
 
-Base development images use `base-dev-` prefix.
-
-Base deployment/runtime images use `base-` prefix.
-
-## Versioning
-
-We keep `latest` tag for testing and that is updated at-will. Otherwise, semver is used:
-
-* Arch is reserved for OS changes/upgrades (Ubuntu LTS change, ...)
-* Major is reserved for packages being added or deleted
-* Minor is reserved for package changes
+Some of the images use tags to differentiate between versions of an underlying library/system, such as apiaryio/coreapp
+image might be built on different Node.js versions. If this is the case, each tag has a separate Dockerfile in a folder 
+with a tag name:
+ 
+     ```
+         ./coreapp
+         ./coreapp/0.10/Dockerfile
+         ./coreapp/0.12/Dockerfile
+    ```
 
 ## Usage and maintenance
 
 1. Drill into the respective directory
-1. If doing major/arch change, update Dockerfile
-1. Build it with the tag expressed below:
+1. If doing major/arch change, update `REFRESHED_AT` in the Dockerfile
+1. Build the Docker image with the tag expressed below:
 
-	```sh
-	$ (sudo) docker build -t "apiaryio/base-$name:$version" .
-	```
+    ```sh
+    $ (sudo) docker build -t "apiaryio/$name:$tag" .
+    ```
 
 1. Upload it to DockerHub
 
-	```sh
-	$ (sudo) docker push -t "apiaryio/base-$name:$version"
-	```
+    ```sh
+    $ (sudo) docker push -t "apiaryio/$name:$tag"
+    ```
 
 1. When building Apiary app, use the proper `FROM:` directive inside your `Dockerfile`
 
+## Adding a new image
 
-## Areas of responsibility
+1. Create a repository in DockerHub
+1. Add a folder with the image name to this repository structure
+1. If multiple versions are needed, add subfolders with the tag names to the image folder
+1. Add your Dockerfile(s)
 
-### C++-based programs
-
-* Directories: [cpp](cpp/) and [cpp-dev](cpp-dev/)
-* DockerHub name: `base-cpp` and `base-dev-cpp`
-
-
-When written in C++, such as:
-
-* [snowcrash](https://github.com/apiaryio/snowcrash)
+Images are built automatically on CircleCI. Builds on `master` branch include a deploy step with pushing the built 
+images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once 
+the changes are merged.

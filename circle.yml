@@ -1,0 +1,18 @@
+machine:
+  services:
+    - docker
+  node:
+    version: 4.4.0
+dependencies:
+  pre:
+    - ./scripts/install-dependencies.sh
+  override:
+    - ./scripts/docker-build-images.sh
+test:
+  override:
+    - ./scripts/test.sh
+deployment:
+    production:
+        branch: master
+        commands:
+          - ./scripts/docker-internal-release.sh
