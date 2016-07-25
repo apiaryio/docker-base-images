@@ -102,4 +102,4 @@ else:
         print("Squashed {0}".format(image.full_name))
     
     tmp_image_file = open("/tmp/images", 'w')
-    tmp_image_file.write('"{0}"'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))
+    tmp_image_file.write('{0}'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))

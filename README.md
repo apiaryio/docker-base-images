@@ -15,11 +15,11 @@ Some of the images use tags to differentiate between versions of an underlying l
 image might be built on different Node.js versions. If this is the case, each tag has a separate Dockerfile in a folder 
 with a tag name:
  
-     ```
-         ./coreapp
-         ./coreapp/0.10/Dockerfile
-         ./coreapp/0.12/Dockerfile
-    ```
+```
+     ./coreapp
+     ./coreapp/0.10/Dockerfile
+     ./coreapp/0.12/Dockerfile
+```
 
 ## Usage and maintenance
 
