@@ -3,8 +3,8 @@ MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-15
 
-RUN apt-get update && \
-  apt-get upgrade -y && \
+RUN apt-get upgrade -y && \
+  apt-get update && \
   apt-get clean -y && \
   apt-get autoclean -y && \
   apt-get autoremove -y && \
