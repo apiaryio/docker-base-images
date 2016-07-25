@@ -40,7 +40,7 @@ def update_images_to_rebuild(rebuild_all, changed_files=None):
                 break
             else:
                 for image in all_images.values():
-                    if image.name in cf or (image.versioned and image.tag in cf):
+                    if image.name in cf:
                         print('Adding {0} because {1} has changed'.format(image.full_name, cf))
                         images_to_rebuild.add(image.full_name)
             if len(images_to_rebuild) != len(all_images):

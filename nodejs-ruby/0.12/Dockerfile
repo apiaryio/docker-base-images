@@ -7,6 +7,7 @@ ENV RUBY_MAJOR 2.3
 ENV RUBY_VERSION 2.3.1
 ENV RUBY_DOWNLOAD_SHA256 b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd
 ENV RUBYGEMS_VERSION 2.6.6
+ENV BUNDLER_VERSION 1.12.5
 
 # (taken from https://github.com/docker-library/ruby/blob/master/2.3/Dockerfile)
 
@@ -43,8 +44,6 @@ RUN set -ex \
     && apt-get purge -y --auto-remove $buildDeps \
     && gem update --system $RUBYGEMS_VERSION \
     && rm -r /usr/src/ruby
-
-ENV BUNDLER_VERSION 1.12.5
 
 RUN gem install bundler --version "$BUNDLER_VERSION"
 
