@@ -7,7 +7,7 @@ ENV MONGO_MAJOR 3.0
 ENV MONGO_VERSION 3.0.12
 
 USER root
-RUN apt-get install -y wget \
+RUN apt-get install -y wget vnc4server \
     && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 \
     && echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
