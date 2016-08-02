@@ -1,7 +1,7 @@
 FROM        apiaryio/nodejs:0.12
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-07-18
+ENV REFRESHED_AT 2016-08-02
 
 ENV MONGO_MAJOR 3.0
 ENV MONGO_VERSION 3.0.12
@@ -20,9 +20,11 @@ RUN apt-get install -y wget \
                           php5-cli \
                           php5-curl \
                           libkrb5-dev \
+                          ruby \
                           ruby-dev \
                           build-essential \
                           libssl-dev \
                           redis-tools \
                           vnc4server \
+    && gem install rest-client \
     && /sbin/ldconfig -v
