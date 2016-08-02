@@ -1,4 +1,4 @@
-FROM        node:4
+FROM        apiaryio/nodejs:4
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-07-18
