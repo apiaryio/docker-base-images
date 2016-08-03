@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+if (process.argv[2]!==undefined) {
+  var Registry = require('npm-registry');
+  var npm = new Registry();
+  npm.packages.get(process.argv[2], function (err, data) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(data[0]['dist-tags']['stable']);
+    }
+  });
+}

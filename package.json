@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/apiaryio/docker-base-images#readme",
   "dependencies": {
-    "dockerlint": "0.1.4"
+    "dockerlint": "0.1.4",
+    "npm-registry": ""
   }
 }
