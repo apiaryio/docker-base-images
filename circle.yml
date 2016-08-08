@@ -7,6 +7,7 @@ dependencies:
   pre:
     - ./scripts/install-dependencies.sh
   override:
+    - npm install
     - ./scripts/docker-build-images.sh
 test:
   override:

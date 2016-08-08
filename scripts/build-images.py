@@ -11,6 +11,7 @@ class DockerImage:
         self.versioned = versioned
         self._set_name()
         self._set_parent_name()
+        self._extra_build()
 
     def _set_parent_name(self):
         df = open(self.dockerfile).read()
@@ -26,6 +27,13 @@ class DockerImage:
             self.tag = self.name
             self.name = os.path.split(os.path.dirname(df_location))[1]
             self.full_name = "apiaryio/{0}:{1}".format(self.name, self.tag)
+
+    def _extra_build(self):
+        df_location = os.path.dirname(self.dockerfile)
+        if os.path.isfile(os.path.join(df_location, 'build.sh')):
+            self.extra = True
+        else:
+            self.extra = False
 
 def update_images_to_rebuild(rebuild_all, changed_files=None):
     if rebuild_all or not changed_files:
@@ -92,15 +100,21 @@ else:
     print('These images will be rebuilt (in this order): ' + ', '.join([image.full_name for image in sorted_images_to_rebuild]))
     for image in sorted_images_to_rebuild:
         print('Building ' + image.full_name)
-        return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
-        if return_code != 0:
-            print('Error building {0}'.format(image.full_name))
-            sys.exit(1)
-        print("Squashing {0}...".format(image.full_name))
-        call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
-        call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
-        call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
-        print("Squashed {0}".format(image.full_name))
-    
+        if image.extra:
+            return_code = call(os.path.join(image.dockerfile_folder,"build.sh"), shell=True)
+            if return_code != 0:
+                print('Error building {0}'.format(image.full_name))
+                sys.exit(1)
+        else:
+            return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
+            if return_code != 0:
+                print('Error building {0}'.format(image.full_name))
+                sys.exit(1)
+            print("Squashing {0}...".format(image.full_name))
+            call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
+            call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
+            call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
+            print("Squashed {0}".format(image.full_name))
+
     tmp_image_file = open("/tmp/images", 'w')
     tmp_image_file.write('{0}'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))
