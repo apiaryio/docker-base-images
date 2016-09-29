@@ -107,15 +107,14 @@ else:
                 print('Error building {0}'.format(image.full_name))
                 sys.exit(1)
         else:
-            # return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
-            return_code = 0
+            return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
             if return_code != 0:
                 print('Error building {0}'.format(image.full_name))
                 sys.exit(1)
             print("Squashing {0}...".format(image.full_name))
-            # call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
-            # call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
-            # call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
+            call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
+            call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
+            call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
             print("Squashed {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
