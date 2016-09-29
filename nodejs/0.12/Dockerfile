@@ -1,7 +1,7 @@
 FROM        node:0.12
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-07-28
+ENV REFRESHED_AT 2016-09-28
 
 USER root
 RUN apt-get update && \
