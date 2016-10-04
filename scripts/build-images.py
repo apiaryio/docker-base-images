@@ -42,15 +42,13 @@ def update_images_to_rebuild(rebuild_all, changed_files=None):
     else:
         print('Selecting images for rebuild')
         for cf in changed_files:
-            if 'scripts/' in cf:
-                print('A core script has changes, rebuilding all images...')
-                update_images_to_rebuild(True, all_images)
-                break
-            else:
-                for image in all_images.values():
-                    if image.name in cf:
-                        print('Adding {0} because {1} has changed'.format(image.full_name, cf))
-                        images_to_rebuild.add(image.full_name)
+            for image in all_images.values():
+                if image.name in cf:
+                    if image.versioned and image.tag not in cf:
+                        print("Won't add {0} as nothing changed for this tag".format(image.full_name))
+                        continue
+                    print('Adding {0} because {1} has changed'.format(image.full_name, cf))
+                    images_to_rebuild.add(image.full_name)
             if len(images_to_rebuild) != len(all_images):
                 for image in all_images.values():
                     if image.parent_name in images_to_rebuild:
@@ -72,9 +70,13 @@ sorted_images_to_rebuild = []
 parser = ArgumentParser()
 parser.add_argument('-a', '--rebuild-all')
 parser.add_argument('-f', '--changed-files')
+parser.add_argument('-t', '--dry-run')
 args = parser.parse_args()
 rebuild_all = args.rebuild_all == '1'
 changed_files = []
+dry_run = False
+if args.dry_run and args.dry_run == '1':
+    dry_run = True
 if args.changed_files:
         changed_files = args.changed_files.split('\n')
 print(changed_files)
@@ -101,21 +103,25 @@ else:
     print('These images will be rebuilt (in this order): ' + ', '.join([image.full_name for image in sorted_images_to_rebuild]))
     for image in sorted_images_to_rebuild:
         print('Building ' + image.full_name)
-        if image.extra:
-            return_code = call(os.path.join(image.dockerfile_folder,"build.sh"), shell=True)
-            if return_code != 0:
-                print('Error building {0}'.format(image.full_name))
-                sys.exit(1)
+        if dry_run:
+            print('!!! Warning: Skipping image build due to DRY-RUN mode. Would have built: {0}'.format(image.full_name))
+            return_code = 0
         else:
-            return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
-            if return_code != 0:
-                print('Error building {0}'.format(image.full_name))
-                sys.exit(1)
-            print("Squashing {0}...".format(image.full_name))
-            call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
-            call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
-            call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
-            print("Squashed {0}".format(image.full_name))
+            if image.extra:
+                return_code = call(os.path.join(image.dockerfile_folder,"build.sh"), shell=True)
+                if return_code != 0:
+                    print('Error building {0}'.format(image.full_name))
+                    sys.exit(1)
+            else:
+                return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
+                if return_code != 0:
+                    print('Error building {0}'.format(image.full_name))
+                    sys.exit(1)
+                print("Squashing {0}...".format(image.full_name))
+                call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
+                call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
+                call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
+                print("Squashed {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
     tmp_image_file.write('{0}'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))
