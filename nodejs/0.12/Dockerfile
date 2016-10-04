@@ -1,7 +1,8 @@
 FROM        node:0.12
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-09-28
+ENV REFRESHED_AT 2016-10-04
+ENV NPM_VERSION=2.15.11
 
 USER root
 RUN apt-get update && \
@@ -13,3 +14,5 @@ RUN apt-get update && \
     rm -rf /var/cache/debconf/*-old && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/doc/*
+
+RUN npm install -g npm@$NPM_VERSION
