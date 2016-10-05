@@ -1,11 +1,11 @@
-FROM        apiaryio/nodejs:0.12
+FROM        apiaryio/nodejs:0.10
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-08-02
 
-ENV MONGO_MAJOR 3.0
-ENV MONGO_VERSION 3.0.12
-ENV MONGO_GPG=7F0CEB10
+ENV MONGO_MAJOR 3.2
+ENV MONGO_VERSION 3.2.9
+ENV MONGO_GPG=EA312927
 
 USER root
 RUN apt-get install -y wget \

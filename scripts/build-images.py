@@ -1,8 +1,7 @@
-import os, re, sys
+import os, re, sys, subprocess
 
 from argparse import ArgumentParser
 from glob import glob
-from subprocess import call
 
 class DockerImage:
     def __init__(self, dockerfile, versioned=False):
@@ -108,19 +107,26 @@ else:
             return_code = 0
         else:
             if image.extra:
-                return_code = call(os.path.join(image.dockerfile_folder,"build.sh"), shell=True)
+                return_code = subprocess.call(os.path.join(image.dockerfile_folder,"build.sh"), shell=True)
                 if return_code != 0:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
             else:
-                return_code = call("docker build -t {0} -f {1} {2}".format(image.full_name, image.dockerfile, image.dockerfile_folder), shell=True)
+                args_build = ["docker", "build", "-t", image.full_name, "-f", image.dockerfile, image.dockerfile_folder]
+                args_cat = ["cat"]
+                process_build = subprocess.Popen(args_build, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
+                process_cat = subprocess.Popen(args_cat, stdin=process_build.stdout, stdout=subprocess.PIPE, shell=False)
+                process_build.stdout.close()
+                output = process_cat.communicate()[0]
+                print(output)
+                return_code = process_build.wait()
                 if return_code != 0:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
                 print("Squashing {0}...".format(image.full_name))
-                call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
-                call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
-                call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
+                subprocess.call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
+                subprocess.call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
+                subprocess.call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
                 print("Squashed {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
