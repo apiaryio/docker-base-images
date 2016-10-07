@@ -12,7 +12,6 @@ else
         SHA2=${BASH_REMATCH[2]}
         REBUILD_ALL=0
     elif [[ $CIRCLE_COMPARE_URL =~ commit\/([0-9a-f\^\~]+)$ ]]; then
-        SHA1="master"
         SHA2=${BASH_REMATCH[1]}
         REBUILD_ALL=0
     else
@@ -22,6 +21,10 @@ else
 fi
 
 if [ $REBUILD_ALL == 0 ]; then
+    git log $SHA1>/dev/null 2>&1
+    if [ $? != 0 ]; then
+        SHA1="origin/master"
+    fi
     CHANGED_FILES=`git diff --name-only $SHA1 $SHA2`
 fi
 
