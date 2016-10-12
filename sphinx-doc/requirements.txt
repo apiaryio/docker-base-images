@@ -6,3 +6,4 @@ pygments>=2.1
 PyYAML
 sphinxcontrib-googleanalytics
 sphinx-autobuild
+sphinxcontrib-apiblueprint
