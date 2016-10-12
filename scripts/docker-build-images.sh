@@ -20,7 +20,7 @@ else
     fi
 fi
 
-if [ $REBUILD_ALL == 0 ]; then
+if [ $REBUILD_ALL != 1 ]; then
     git log $SHA1>/dev/null 2>&1
     if [ $? != 0 ]; then
         SHA1="origin/master"
