@@ -1,7 +1,7 @@
-FROM        node:6
+FROM        node:boron
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-09-30
+ENV REFRESHED_AT 2016-10-19
 
 USER root
 RUN apt-get update && \
