@@ -1,7 +1,7 @@
 FROM        node:argon
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-10-19
+ENV REFRESHED_AT 2016-11-10
 
 USER root
 RUN apt-get update && \
