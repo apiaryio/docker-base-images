@@ -22,10 +22,13 @@ fi
 
 if [ $REBUILD_ALL != 1 ]; then
     git log $SHA1>/dev/null 2>&1
-    if [ $? != 0 ]; then
+    if [[ $? != 0 || -z "$SHA1" ]]; then
         SHA1="origin/master"
     fi
+    echo "SHA1=$SHA1"
+    echo "SHA2=$SHA2"
     CHANGED_FILES=`git diff --name-only $SHA1 $SHA2`
+    echo "CHANGED_FILES=$CHANGED_FILES"
 fi
 
 python ./scripts/build-images.py -a $REBUILD_ALL -f "$CHANGED_FILES" -t "$DRY_RUN"
