@@ -1,12 +1,15 @@
-FROM golang:alpine
+FROM alpine
 MAINTAINER sre@apiary.io
 
 ENV REFRESHED_AT 2016-12-13
 
-# Install redis from alpine repositories
-RUN apk add --update redis git
+RUN mkdir -p /go/bin && chmod -R 777 /go
+ENV GOPATH /go
+ENV PATH /go/bin:$PATH
 
-RUN go get -u github.com/square/ghostunnel
+COPY ghostunnel /go/bin
+
+RUN apk add --update redis ca-certificates
 
 # Configure redis to listen on UNIX socket
 RUN \
