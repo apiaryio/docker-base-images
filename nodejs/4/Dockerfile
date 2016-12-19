@@ -1,4 +1,4 @@
-FROM        node:argon
+FROM        node:4.6
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-12-19
