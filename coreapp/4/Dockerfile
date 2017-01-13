@@ -1,10 +1,10 @@
 FROM        apiaryio/nodejs:4
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-12-19
+ENV REFRESHED_AT 2017-01-13
 
 ENV MONGO_MAJOR 3.2
-ENV MONGO_VERSION 3.2.9
+ENV MONGO_VERSION 3.2.11
 ENV MONGO_GPG=EA312927
 
 USER root
@@ -29,3 +29,6 @@ RUN apt-get install -y wget \
                           vnc4server \
     && gem install rest-client \
     && /sbin/ldconfig -v
+
+RUN npm install -g coffee-script@1.11.0 grunt-cli@1.2.0
+RUN npm install -g node-gyp
