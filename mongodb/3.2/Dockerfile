@@ -1,7 +1,7 @@
-FROM        mongo:3.2.9
+FROM        mongo:3.2.11
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-09-20
+ENV REFRESHED_AT 2017-01-13
 
 RUN chown -R mongodb:mongodb /data/db
 
