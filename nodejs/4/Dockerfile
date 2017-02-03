@@ -1,7 +1,7 @@
 FROM        node:argon
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-12-20
+ENV REFRESHED_AT 2017-02-03
 ENV NPM_VERSION=4.1.1
 
 USER root

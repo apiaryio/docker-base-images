@@ -1,7 +1,7 @@
 FROM        apiaryio/nodejs:4
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-07-18
+ENV REFRESHED_AT 2017-02-03
 
 # (taken from https://github.com/docker-library/ruby/blob/master/2.3/Dockerfile)
 ENV RUBY_MAJOR 2.3
