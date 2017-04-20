@@ -15,6 +15,7 @@ RUN apt-get install -y wget \
     && apt-get update \
     && apt-get install -y mongodb-org-shell=$MONGO_VERSION \
                           google-chrome-stable \
+                          google-chrome-unstable \
                           xvfb \
                           php5-common \
                           php5-cli \
