@@ -18,3 +18,5 @@ RUN apt-get update && \
     rm -rf /var/cache/debconf/*-old && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/doc/*
+
+RUN npm install -g npm@$NPM_VERSION
