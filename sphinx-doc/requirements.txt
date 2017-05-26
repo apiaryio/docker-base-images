@@ -7,3 +7,4 @@ PyYAML
 sphinxcontrib-googleanalytics
 sphinx-autobuild
 sphinxcontrib-apiblueprint
+sphinx-git
