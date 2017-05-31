@@ -1,7 +1,7 @@
 FROM        apiaryio/debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2017-05-26
+ENV REFRESHED_AT 2017-05-31
 
 COPY requirements.txt /tmp/
 
@@ -11,7 +11,8 @@ RUN apt-get update &&\
         python-yaml \
         graphviz \
         make \
-        python-pip && \
+        python-pip \
+        git && \
     pip install -r /tmp/requirements.txt
 
 RUN mkdir /mnt/docs
