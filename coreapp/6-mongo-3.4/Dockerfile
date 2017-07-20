@@ -1,13 +1,13 @@
-FROM        apiaryio/nodejs:0.10
+FROM        apiaryio/nodejs:6
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-08-02
+ENV REFRESHED_AT 2017-07-20
 
-ENV MONGO_MAJOR 3.2
-ENV MONGO_VERSION 3.2.9
-ENV MONGO_GPG=EA312927
-
+ENV MONGO_MAJOR 3.4
+ENV MONGO_VERSION 3.4.5
+ENV MONGO_GPG=0C49F3730359A14518585931BC711F9BA15703C6
 USER root
+
 RUN apt-get install -y wget \
     && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv $MONGO_GPG \
     && echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list \
@@ -29,3 +29,6 @@ RUN apt-get install -y wget \
                           vnc4server \
     && gem install rest-client \
     && /sbin/ldconfig -v
+
+RUN npm install -g coffee-script@1.11.0 grunt-cli@1.2.0
+RUN npm install -g node-gyp
