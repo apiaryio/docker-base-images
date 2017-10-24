@@ -4,7 +4,9 @@
   "description": "This repository helps to keep Apiary environment, services and libraries consistent and in sync.",
   "main": "index.js",
   "scripts": {
-    "test": "bash scripts/test.sh"
+    "test": "bash scripts/test.sh",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,8 @@
   "homepage": "https://github.com/apiaryio/docker-base-images#readme",
   "dependencies": {
     "dockerlint": "0.1.4",
-    "npm-registry": ""
-  }
+    "npm-registry": "",
+    "snyk": "^1.45.0"
+  },
+  "snyk": true
 }
