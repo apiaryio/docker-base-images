@@ -9,6 +9,7 @@ ENV RUBY_VERSION 2.3.1
 ENV RUBY_DOWNLOAD_SHA256 b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd
 ENV RUBYGEMS_VERSION 2.6.6
 ENV BUNDLER_VERSION 1.12.5
+ENV BUILD_DEPS 'bison libgdbm-dev ruby'
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -21,13 +22,8 @@ RUN mkdir -p /usr/local/etc \
 # some of ruby's build scripts are written in ruby
 # we purge this later to make sure our final image uses what we just built
 RUN set -ex \
-    && buildDeps=' \
-        bison \
-        libgdbm-dev \
-        ruby \
-    ' \
     && apt-get update \
-    && apt-get install -y --no-install-recommends $buildDeps \
+    && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" \
     && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \
@@ -40,7 +36,7 @@ RUN set -ex \
     && ./configure --disable-install-doc \
     && make -j"$(nproc)" \
     && make install \
-    && apt-get purge -y --auto-remove $buildDeps \
+    && apt-get purge -y --auto-remove $BUILD_DEPS \
     && gem update --system $RUBYGEMS_VERSION \
     && rm -r /usr/src/ruby
 
