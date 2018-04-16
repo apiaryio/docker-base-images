@@ -1,7 +1,7 @@
-FROM        apiaryio/nodejs:0.10
+FROM        node:boron
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-07-14
+ENV REFRESHED_AT 2018-04-16
 
 RUN npm install -g aglio
 USER root
@@ -9,9 +9,10 @@ RUN mkdir -p /doc
 
 RUN apt-get update -qqy && \
     apt-get install -y software-properties-common python-software-properties && \
+    echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list && \
     apt-get update -y && \
     apt-get install -y   \
-      gcc-4.7 \
+      gcc-5 \
       gdb \
       build-essential \
       git-core \
