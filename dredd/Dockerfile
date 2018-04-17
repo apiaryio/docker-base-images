@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/mhart/alpine-node/
-FROM mhart/alpine-node:4.4
+FROM node:carbon-alpine
 # If you have native dependencies, you'll need extra tools
 
 MAINTAINER  Apiary <sre@apiary.io>
