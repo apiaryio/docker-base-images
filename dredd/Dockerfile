@@ -1,6 +1,10 @@
 # https://hub.docker.com/r/mhart/alpine-node/
 FROM mhart/alpine-node:4.4
 # If you have native dependencies, you'll need extra tools
+
+MAINTAINER  Apiary <sre@apiary.io>
+ENV REFRESHED_AT 2018-04-17
+
 ARG DREDD_VERSION=latest
 RUN echo ${DREDD_VERSION}
 RUN apk add --no-cache make gcc g++ python git
