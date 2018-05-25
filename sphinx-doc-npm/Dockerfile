@@ -1,6 +1,8 @@
 FROM        apiaryio/sphinx-doc
 MAINTAINER  Apiary <sre@apiary.io>
 
+ENV REFRESHED_AT 2018-05-25
+
 COPY requirements.txt /tmp/
 
 RUN apt-get install -y npm && \
