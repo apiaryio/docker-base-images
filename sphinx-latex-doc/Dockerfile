@@ -1,7 +1,7 @@
 FROM        apiaryio/sphinx-doc
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2017-06-01
+ENV REFRESHED_AT 2018-05-25
 
 RUN apt-get install -y --no-install-recommends \
         texlive \
