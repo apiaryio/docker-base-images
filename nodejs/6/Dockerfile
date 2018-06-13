@@ -1,7 +1,7 @@
 FROM        node:boron
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-04-16
+ENV REFRESHED_AT 2018-06-13
 ENV NPM_VERSION=4.6.1
 
 USER root

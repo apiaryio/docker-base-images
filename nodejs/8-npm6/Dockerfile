@@ -1,7 +1,7 @@
 FROM        node:carbon
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-06-05
+ENV REFRESHED_AT 2018-06-13
 ENV NPM_VERSION=6.1.0
 
 USER root
