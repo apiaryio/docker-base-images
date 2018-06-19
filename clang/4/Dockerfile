@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV CLANG_VERSION=6.0.0
+ENV CLANG_VERSION=4.0.0
 
 RUN apt-get update && \
     apt-get install -y curl xz-utils python build-essential git-core && \
