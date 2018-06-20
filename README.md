@@ -2,19 +2,19 @@
 
 # Apiary Docker images
 
-This repository helps keep Apiary environment, services and libraries consistent and in sync. 
+This repository helps keep Apiary environment, services and libraries consistent and in sync.
 
 Each directory has an area of responsibility and the libraries should derive from the respective image.
 
-To keep the image size to its minimum, images are usually derived from minimal Debian image (apiaryio/debian-minimal) 
+To keep the image size to its minimum, images are usually derived from minimal Debian image (apiaryio/debian-minimal)
 or Alpine Linux.
 
 Libraries use the minimal stack available.
 
 Some of the images use tags to differentiate between versions of an underlying library/system, such as apiaryio/coreapp
-image might be built on different Node.js versions. If this is the case, each tag has a separate Dockerfile in a folder 
+image might be built on different Node.js versions. If this is the case, each tag has a separate Dockerfile in a folder
 with a tag name:
- 
+
 ```
      ./coreapp
      ./coreapp/0.10/Dockerfile
@@ -41,11 +41,11 @@ with a tag name:
 
 ## Adding a new image
 
-1. Create a repository in DockerHub
+1. Create a repository in DockerHub and set Collaborators to SRE with writing rights.
 1. Add a folder with the image name to this repository structure
 1. If multiple versions are needed, add subfolders with the tag names to the image folder
 1. Add your Dockerfile(s)
 
-Images are built automatically on CircleCI. Builds on `master` branch include a deploy step with pushing the built 
-images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once 
+Images are built automatically on CircleCI. Builds on `master` branch include a deploy step with pushing the built
+images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once
 the changes are merged.
