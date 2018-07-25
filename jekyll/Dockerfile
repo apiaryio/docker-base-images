@@ -1,7 +1,7 @@
 FROM        apiaryio/debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-10-11
+ENV REFRESHED_AT 2018-07-13
 
 # Requirements for installing using bundler
 # nodejs intentional as it is required as a javascript runtime for some ruby packages
