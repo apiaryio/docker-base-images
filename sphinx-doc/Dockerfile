@@ -1,7 +1,7 @@
 FROM        apiaryio/debian-minimal
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-05-25
+ENV REFRESHED_AT 2018-07-25
 
 COPY requirements.txt /tmp/
 
