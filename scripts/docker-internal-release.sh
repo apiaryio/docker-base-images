@@ -30,7 +30,7 @@ if [[ -e $CREDENTIALS_FILE && ! -w $CREDENTIALS_FILE ]]; then
     exit 1
 fi
 
-docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 exitOnError "docker login"
 
 for IMAGE_NAME in $IMAGES

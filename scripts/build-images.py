@@ -123,11 +123,9 @@ else:
                 if return_code != 0:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
-                print("Squashing {0}...".format(image.full_name))
+                print("Saving {0}...".format(image.full_name))
                 subprocess.call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
-                subprocess.call("sudo docker-squash -i \"/tmp/{0}.tar\" -o \"/tmp/{0}-squashed.tar\"".format(image.name), shell=True)
-                subprocess.call("cat \"/tmp/{0}-squashed.tar\" | docker load".format(image.name), shell=True)
-                print("Squashed {0}".format(image.full_name))
+                print("Saved {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
     tmp_image_file.write('{0}'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))

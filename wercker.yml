@@ -1,0 +1,57 @@
+box: python:2-alpine
+no-response-timeout: $NO_RESPONSE_TIMEOUT
+command-timeout: $COMMAND_TIMEOUT
+
+lint:
+  box: node:8
+  steps:
+    - script:
+        name: Install the dependencies
+        code: npm install -g dockerlint
+    - script:
+        name: Check Dockerfiles
+        code: ./scripts/test.sh
+build:
+  docker: true
+  steps:
+    - script:
+        name: Install packages
+        code: apk add docker bash git
+    - script:
+        name: Docker version
+        code: docker version
+    - script:
+        name: Build the images
+        code: ./scripts/docker-build-images.sh
+    - script:
+        name: Copy image list to output
+        code: |
+            cp /tmp/images $WERCKER_OUTPUT_DIR/ || true
+            cp /tmp/*.tar   $WERCKER_OUTPUT_DIR/ || true
+            cp ./scripts/docker-internal-release.sh $WERCKER_OUTPUT_DIR/
+deploy:
+  docker: true
+  steps:
+    - script:
+        name: Install packages
+        code: |
+            apk add docker bash
+            pip install docker-squash
+    - script:
+        name: Copy image list to /tmp
+        code: cp $WERCKER_SOURCE_DIR/images /tmp/
+    - script:
+        name: Load docker images
+        code: |
+            for DOCKERFILE in $(ls *.tar); do
+                cat $DOCKERFILE | docker load
+            done
+    - script:
+        name: Squash docker images
+        code: |
+            for IMAGE in $(docker images -q); do
+                docker-squash $IMAGE
+            done
+    - script:
+        name: Release docker images
+        code: ./docker-internal-release.sh

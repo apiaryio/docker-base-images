@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/apiaryio/docker-base-images.svg?style=svg)](https://circleci.com/gh/apiaryio/docker-base-images)
+[![wercker status](https://app.wercker.com/status/16020467089fa280d9c948e8d12265c2/s/master "wercker status")](https://app.wercker.com/project/byKey/16020467089fa280d9c948e8d12265c2)
 
 # Apiary Docker images
 
@@ -49,6 +49,5 @@ with a tag name:
 1. Log in to Docker Hub using `$ docker login` from the CLI if you haven't already.
 1. If the image was built correctly, push it to the repository with `$ (sudo) docker push -t "apiaryio/$name:$tag"`
 
-Images are built automatically on CircleCI and Wercker. Builds on `master` branch include a deploy step with pushing the built
-images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once
-the changes are merged.
+Images are built automatically on Wercker. Builds on `master` branch include a deploy step with pushing the built
+images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once the changes are merged.
