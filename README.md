@@ -46,7 +46,8 @@ with a tag name:
 1. Add a folder with the image name to this repository structure, e.g. `coreapp`
 1. If multiple versions are needed, add subfolders with the tag names to the image folder, e.g. `8-chrome-stable`.
 1. Build your image locally with `$ (sudo) docker build -t "apiaryio/$name:$tag" .`to make sure it works. You can skip the `$tag` and then `latest` will be used by default.
-1. If the image was buolt correctly, push it to the repository with `$ (sudo) docker push -t "apiaryio/$name:$tag"`
+1. Log in to Docker Hub using `$ docker login` from the CLI if you haven't already.
+1. If the image was built correctly, push it to the repository with `$ (sudo) docker push -t "apiaryio/$name:$tag"`
 
 Images are built automatically on CircleCI and Wercker. Builds on `master` branch include a deploy step with pushing the built
 images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once

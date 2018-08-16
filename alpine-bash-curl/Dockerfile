@@ -1,5 +1,5 @@
 FROM alpine
-MAINTAINER sre@apiary.io
+MAINTAINER apiary-sre_ww@oracle.com
 
 ENV REFRESHED_AT 2018-08-16
 
