@@ -41,11 +41,13 @@ with a tag name:
 
 ## Adding a new image
 
-1. Create a repository in DockerHub and set Collaborators to SRE with writing rights.
-1. Add a folder with the image name to this repository structure
-1. If multiple versions are needed, add subfolders with the tag names to the image folder
-1. Add your Dockerfile(s)
+1. Create a new repository for `apiaryio` in DockerHub.
+1. Set Collaborators for that repository to SRE with admin rights.
+1. Add a folder with the image name to this repository structure, e.g. `coreapp`
+1. If multiple versions are needed, add subfolders with the tag names to the image folder, e.g. `8-chrome-stable`.
+1. Build your image locally with `$ (sudo) docker build -t "apiaryio/$name:$tag" .`to make sure it works. You can skip the `$tag` and then `latest` will be used by default.
+1. If the image was buolt correctly, push it to the repository with `$ (sudo) docker push -t "apiaryio/$name:$tag"`
 
-Images are built automatically on CircleCI. Builds on `master` branch include a deploy step with pushing the built
+Images are built automatically on CircleCI and Wercker. Builds on `master` branch include a deploy step with pushing the built
 images to DockerHub. If you add a new image as described above, your image will get built and pushed automatically once
 the changes are merged.
