@@ -6,7 +6,7 @@ if [ -z "$IMAGES" ]; then
     fi
     if [ -z "$IMAGES" ]; then
         echo "No IMAGES set, skipping the internal release"
-        exit 1
+        exit 0
     fi
 fi
 
@@ -20,14 +20,12 @@ function exitOnError {
 
 echo "Authenticating with Docker Hub..."
 if [[ -z "$DOCKER_EMAIL" || -z "$DOCKER_USER" || -z "$DOCKER_PASS" ]]; then
-    echo "DockerHub credentials are missing (DOCKER_EMAIL, DOCKER_USER, DOCKER_PASS), cannot proceed."
-    exit 1
+    exitOnError "DockerHub credentials are missing (DOCKER_EMAIL, DOCKER_USER, DOCKER_PASS), cannot proceed."
 fi
 
 CREDENTIALS_FILE=~/.docker/config.json
 if [[ -e $CREDENTIALS_FILE && ! -w $CREDENTIALS_FILE ]]; then
-    echo "Found $CREDENTIALS_FILE but it's not writable, cannot proceed."
-    exit 1
+    exitOnError "Found $CREDENTIALS_FILE but it's not writable, cannot proceed."
 fi
 
 echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
