@@ -39,7 +39,7 @@ deploy:
             pip install docker-squash
     - script:
         name: Copy image list to /tmp
-        code: cp $WERCKER_SOURCE_DIR/images /tmp/
+        code: cp $WERCKER_SOURCE_DIR/images /tmp/ || true
     - script:
         name: Load docker images
         code: |
