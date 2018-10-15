@@ -112,7 +112,12 @@ else:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
             else:
-                args_build = ["docker", "build", "-t", image.full_name, "-f", image.dockerfile, image.dockerfile_folder]
+                args_build = ["docker", "build"]
+                network_name = os.getenv("DOCKER_NETWORK_NAME")
+                if network_name:
+                    args_build += ["--network", network_name]
+                args_build += ["-t", image.full_name, "-f", image.dockerfile, image.dockerfile_folder]
+                print(args_build)
                 args_cat = ["cat"]
                 process_build = subprocess.Popen(args_build, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
                 process_cat = subprocess.Popen(args_cat, stdin=process_build.stdout, stdout=subprocess.PIPE, shell=False)
