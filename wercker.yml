@@ -29,6 +29,10 @@ build:
             cp /tmp/images $WERCKER_OUTPUT_DIR/ || true
             cp /tmp/*.tar   $WERCKER_OUTPUT_DIR/ || true
             cp ./scripts/docker-internal-release.sh $WERCKER_OUTPUT_DIR/
+  after-steps:
+    - apipcs/slack-notifier:
+        url: $SLACK_URL
+
 deploy:
   docker: true
   steps:
@@ -49,9 +53,12 @@ deploy:
     - script:
         name: Squash docker images
         code: |
-            for IMAGE in $(docker images -q); do
+            for IMAGE in $(cat /tmp/images); do
                 docker-squash $IMAGE
             done
     - script:
         name: Release docker images
         code: ./docker-internal-release.sh
+  after-steps:
+    - apipcs/slack-notifier:
+        url: $SLACK_URL
