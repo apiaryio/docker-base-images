@@ -16,7 +16,7 @@ build:
   steps:
     - script:
         name: Install packages
-        code: apk add docker bash git
+        code: apk add docker bash git curl
     - script:
         name: Docker version
         code: docker version
@@ -39,7 +39,7 @@ deploy:
     - script:
         name: Install packages
         code: |
-            apk add docker bash
+            apk add docker bash curl
             pip install docker-squash
     - script:
         name: Copy image list to /tmp
