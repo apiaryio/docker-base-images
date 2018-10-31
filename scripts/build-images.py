@@ -20,14 +20,13 @@ class DockerImage:
     def _set_name(self):
         df_location = os.path.dirname(self.dockerfile)
         self.name = os.path.split(df_location)[1]
-        self.full_name = "apiaryio/" + self.name
-
         if self.versioned:
             self.tag = self.name
-        else
+            self.name = os.path.split(os.path.dirname(df_location))[1]
+        else:
             self.tag = 'latest'
         self.full_name = "apiaryio/{0}:{1}".format(self.name, self.tag)
-        self.print_name = "apiaryio/{0}_{1}".format(self.name, self.tag)
+        self.print_name = "{0}_{1}".format(self.name, self.tag)
 
     def _extra_build(self):
         df_location = os.path.dirname(self.dockerfile)
