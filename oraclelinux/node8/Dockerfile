@@ -1,7 +1,7 @@
 FROM        oraclelinux:7-slim
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-10-10
+ENV REFRESHED_AT 2018-10-31
 ENV NPM_VERSION 5.6.0
 
 USER root
