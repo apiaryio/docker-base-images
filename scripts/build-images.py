@@ -24,8 +24,10 @@ class DockerImage:
 
         if self.versioned:
             self.tag = self.name
-            self.name = os.path.split(os.path.dirname(df_location))[1]
-            self.full_name = "apiaryio/{0}:{1}".format(self.name, self.tag)
+        else
+            self.tag = 'latest'
+        self.full_name = "apiaryio/{0}:{1}".format(self.name, self.tag)
+        self.print_name = "apiaryio/{0}_{1}".format(self.name, self.tag)
 
     def _extra_build(self):
         df_location = os.path.dirname(self.dockerfile)
@@ -129,7 +131,7 @@ else:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
                 print("Saving {0}...".format(image.full_name))
-                subprocess.call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.name), shell=True)
+                subprocess.call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.print_name), shell=True)
                 print("Saved {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
