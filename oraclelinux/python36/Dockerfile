@@ -8,4 +8,4 @@ USER root
 RUN yum install -y yum-utils && yum-config-manager --enable ol7_developer_EPEL
 RUN yum install -y python36
 
-ENTRYPOINT [ "python" ]
+ENTRYPOINT [ "python36" ]
