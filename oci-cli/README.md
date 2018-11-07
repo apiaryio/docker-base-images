@@ -23,6 +23,6 @@ Given the OCI CLI is configured already and the configuration files are in `~/.o
 
 ```
     oci() {
-        docker run -it -v ~/:/home/oci apiaryio/oci-cli $@
+        docker run -it -v ~/:/home/oci apiaryio/oci-cli "$@"
     }
 ```
