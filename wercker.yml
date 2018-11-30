@@ -30,6 +30,9 @@ build:
             cp /tmp/*.tar   $WERCKER_OUTPUT_DIR/ || true
             cp ./scripts/docker-internal-release.sh $WERCKER_OUTPUT_DIR/
   after-steps:
+    - script:
+        name: Cleanup containers, volumes and built images
+        code: ./scripts/cleanup.sh || true
     - apipcs/slack-notifier:
         url: $SLACK_URL
 
@@ -60,5 +63,8 @@ deploy:
         name: Release docker images
         code: ./docker-internal-release.sh
   after-steps:
+    - script:
+        name: Cleanup containers, volumes and built images
+        code: ./scripts/cleanup.sh || true
     - apipcs/slack-notifier:
         url: $SLACK_URL
