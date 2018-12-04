@@ -129,9 +129,6 @@ else:
                 if return_code != 0:
                     print('Error building {0}'.format(image.full_name))
                     sys.exit(1)
-                print("Saving {0}...".format(image.full_name))
-                subprocess.call("docker save {0} > \"/tmp/{1}.tar\"".format(image.full_name, image.print_name), shell=True)
-                print("Saved {0}".format(image.full_name))
 
     tmp_image_file = open("/tmp/images", 'w')
     tmp_image_file.write('{0}'.format(" ".join([image.full_name for image in sorted_images_to_rebuild])))
