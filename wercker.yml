@@ -23,16 +23,7 @@ build:
     - script:
         name: Build the images
         code: ./scripts/docker-build-images.sh
-    - script:
-        name: Copy image list to output
-        code: |
-            cp /tmp/images $WERCKER_OUTPUT_DIR/ || true
-            cp /tmp/*.tar   $WERCKER_OUTPUT_DIR/ || true
-            cp ./scripts/docker-internal-release.sh $WERCKER_OUTPUT_DIR/
   after-steps:
-    - script:
-        name: Cleanup containers, volumes and built images
-        code: ./scripts/cleanup.sh || true
     - apipcs/slack-notifier:
         url: $SLACK_URL
 
@@ -43,22 +34,12 @@ deploy:
         name: Install packages
         code: |
             apk add docker bash curl
-            pip install docker-squash
+    - script:
+        name: Build the images
+        code: ./scripts/docker-build-images.sh
     - script:
         name: Copy image list to /tmp
         code: cp $WERCKER_SOURCE_DIR/images /tmp/ || true
-    - script:
-        name: Load docker images
-        code: |
-            for DOCKERFILE in $(ls *.tar); do
-                cat $DOCKERFILE | docker load
-            done
-    - script:
-        name: Squash docker images
-        code: |
-            for IMAGE in $(cat /tmp/images); do
-                docker-squash $IMAGE
-            done
     - script:
         name: Release docker images
         code: ./docker-internal-release.sh
