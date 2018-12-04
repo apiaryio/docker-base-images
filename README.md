@@ -55,4 +55,4 @@ images to DockerHub. If you add a new image as described above, your image will 
 
 ## Dredd docker image
 
-Dredd is an HTTP API testing tool. You can find out more about it at [its documentation](https://github.com/apiaryio/dredd) or its [code repository](https://dredd.rtfd.io). Docker image [apiaryio/dredd](https://hub.docker.com/r/apiaryio/dredd/) are moved into [separate repository](https://github.com/apiaryio/dredd-docker).
+Dredd is an HTTP API testing tool. You can find out more about it at [its documentation](https://dredd.org) or its [code repository](https://github.com/apiaryio/dredd). Its Docker image [apiaryio/dredd](https://hub.docker.com/r/apiaryio/dredd/) has been moved to a [separate repository](https://github.com/apiaryio/dredd-docker).
