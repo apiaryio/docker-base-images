@@ -33,7 +33,7 @@ deploy:
     - script:
         name: Install packages
         code: |
-            apk add docker bash curl
+            apk add docker bash git curl
     - script:
         name: Build the images
         code: ./scripts/docker-build-images.sh
