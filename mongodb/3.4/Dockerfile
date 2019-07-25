@@ -1,4 +1,4 @@
-# do not upgrade to versions >3.4.18 as they are under the SSPL which is not
+# do not upgrade to versions >3.4.18 as they are under the SSPL which is not OSS
 FROM        mongo:3.4.18
 MAINTAINER  Apiary <sre@apiary.io>
 
