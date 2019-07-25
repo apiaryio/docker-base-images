@@ -1,7 +1,8 @@
-FROM        mongo:3.0.12
+# do not upgrade to versions >3.4.18 as they are under the SSPL which is not
+FROM        mongo:3.4.18
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-07-18
+ENV REFRESHED_AT 2019-07-25
 
 RUN chown -R mongodb:mongodb /data/db
 
