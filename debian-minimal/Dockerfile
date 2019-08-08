@@ -1,4 +1,4 @@
-FROM        debian:jessie
+FROM        debian:stretch
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-15
