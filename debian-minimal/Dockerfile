@@ -1,4 +1,4 @@
-FROM        debian:stretch
+FROM        debian:buster
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2016-02-15
