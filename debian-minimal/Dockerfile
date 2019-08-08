@@ -1,7 +1,7 @@
 FROM        debian:buster
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2016-02-15
+ENV REFRESHED_AT 2019-08-08
 
 RUN apt-get update && \
     apt-get upgrade -y && \
