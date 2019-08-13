@@ -1,4 +1,4 @@
-FROM        node:10.15.3-jessie
+FROM        node:10.15.3-stretch
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2019-08-13
