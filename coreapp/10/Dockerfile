@@ -1,23 +1,18 @@
 FROM        apiaryio/nodejs:10
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2019-08-09
+ENV REFRESHED_AT 2019-08-13
 
-ENV MONGO_MAJOR 3.4
-ENV MONGO_VERSION 3.4.18
 USER root
 
 RUN apt-get update \
     && apt-get install -y wget apt-transport-https ca-certificates \
-    && wget -qO - https://www.mongodb.org/static/pgp/server-$MONGO_MAJOR.asc | apt-key add - \
-    && sh -c 'echo "deb https://repo.mongodb.org/apt/debian jessie/mongodb-org/$MONGO_MAJOR main" >> /etc/apt/sources.list.d/mongodb-org.list' \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
     && wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
     && sh -c 'echo "deb https://packages.sury.org/php/ jessie main" >> /etc/apt/sources.list.d/php.list' \
     && apt-get update \
-    && apt-get install -y mongodb-org-shell=$MONGO_VERSION \
-                          google-chrome-stable \
+    && apt-get install -y google-chrome-stable \
                           xvfb \
                           php-common \
                           php-cli \
