@@ -1,7 +1,7 @@
-FROM        node:dubnium-jessie
+FROM        node:10.15.3-jessie
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2019-08-09
+ENV REFRESHED_AT 2019-08-13
 ENV NPM_VERSION=6.4.1
 
 USER root
