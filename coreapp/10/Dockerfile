@@ -1,7 +1,7 @@
 FROM        apiaryio/nodejs:10
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2019-08-13
+ENV REFRESHED_AT 2019-10-15
 
 USER root
 
