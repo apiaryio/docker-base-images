@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER sre@apiary.io
 
-ENV REFRESHED_AT 2016-12-13
+ENV REFRESHED_AT 2020-02-06
 
 RUN mkdir -p /go/bin && chmod -R 777 /go
 ENV GOPATH /go
