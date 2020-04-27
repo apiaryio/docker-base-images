@@ -1,0 +1,23 @@
+version: 2
+docker:
+  - image: circleci/node:10.9.0
+jobs:
+  deployment:
+    branches:
+      only:
+      - master
+    steps:
+      - run:
+        name: Docker internal release
+        command: ./scripts/docker-internal-release.sh
+  test:
+    steps:
+      - run:
+        name: Run test
+        command: ./scripts/test.sh
+dependencies:
+  pre:
+    - ./scripts/install-dependencies.sh
+  override:
+    - npm install
+    - ./scripts/docker-build-images.sh
