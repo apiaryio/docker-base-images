@@ -1,4 +1,4 @@
-[![wercker status](https://app.wercker.com/status/16020467089fa280d9c948e8d12265c2/s/master "wercker status")](https://app.wercker.com/project/byKey/16020467089fa280d9c948e8d12265c2)
+[![Build Status](https://circleci.com/gh/apiaryio/docker-base-images/tree/master.svg?style=svg)](https://circleci.com/gh/apiaryio/docker-base-images/tree/master)
 
 # Apiary Docker images
 
