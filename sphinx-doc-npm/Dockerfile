@@ -5,8 +5,7 @@ ENV REFRESHED_AT 2020-11-02
 
 COPY requirements.txt /tmp/
 
-RUN apt-get update && \
-    apt-get install -y npm && \
+RUN apt-get install -y npm && \
     pip install -r /tmp/requirements.txt
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node || true
