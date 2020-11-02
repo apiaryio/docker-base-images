@@ -9,10 +9,12 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python-sphinx \
         python-yaml \
+        python-setuptools \
         graphviz \
         make \
         python-pip \
         git && \
+    pip install --upgrade pip setuptools wheel && \
     pip install -r /tmp/requirements.txt
 
 RUN mkdir /mnt/docs
