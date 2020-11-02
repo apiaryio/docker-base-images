@@ -1,9 +1,10 @@
 FROM        apiaryio/sphinx-doc
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-05-25
+ENV REFRESHED_AT 2020-11-02
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
         texlive \
         texlive-latex-extra \
         texlive-fonts-recommended \

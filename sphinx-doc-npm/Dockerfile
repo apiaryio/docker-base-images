@@ -1,11 +1,12 @@
-FROM        apiaryio/sphinx-doc
+FROM        apiaryio/sphinx-doc:latest
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2018-05-25
+ENV REFRESHED_AT 2020-11-02
 
 COPY requirements.txt /tmp/
 
-RUN apt-get install -y npm && \
+RUN apt-get update && \
+    apt-get install -y npm && \
     pip install -r /tmp/requirements.txt
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
