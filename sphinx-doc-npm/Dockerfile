@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y npm && \
     pip install -r /tmp/requirements.txt
 
-RUN ln -ns /usr/bin/nodejs /usr/bin/node
+RUN ln -s /usr/bin/nodejs /usr/bin/node || true
 
 RUN npm install -g coffeedoc coffee-script
 
