@@ -1,4 +1,4 @@
-FROM        debian:oldstable-slim
+FROM        debian:stable-slim
 MAINTAINER  Apiary <sre@apiary.io>
 
 ENV REFRESHED_AT 2020-11-02

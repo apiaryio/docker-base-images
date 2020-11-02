@@ -1,6 +1,6 @@
 Sphinx>=1.8.5
 sphinx_rtd_theme
-commonmark==0.5.5
+commonmark>=0.5.5
 recommonmark
 pygments>=2.1
 PyYAML
