@@ -1,7 +1,7 @@
 FROM        circleci/node:10
 MAINTAINER  Apiary <sre@apiary.io>
 
-ENV REFRESHED_AT 2019-07-01
+ENV REFRESHED_AT 2020-11-02
 ENV NPM_VERSION 6.4.1
 
 USER root
