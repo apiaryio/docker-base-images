@@ -9,7 +9,7 @@ USER root
 
 RUN yum install -y oracle-nodejs-release-el7 \
     && yum-config-manager --enable ol7_developer_nodejs${NODEJS_VERSION_MAJOR} \
-    && yum install -y nodejs \
+    && yum install -y nodejs-10 \
     && yum install -y gcc gcc-c++ autoconf automake make \
     && npm i -g npm@${NPM_VERSION} \
     && yum clean all \
